@@ -11,3 +11,11 @@ provider "aws" {
   region = "ap-southeast-2"
   shared_credentials_file = "~/.aws/credentials"
 }
+
+locals {
+  common_tags = {
+    Project = "terraform-aws-vpn"
+    Maintainer_Software = "Terraform"
+    Project = "git@github.com:sogyals429/terraform-aws-vpn.git"
+  }
+}
