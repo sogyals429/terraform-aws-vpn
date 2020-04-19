@@ -1,8 +1,8 @@
 resource "aws_vpc" "vpn-vpc" {
   cidr_block = var.vpc_cidr
   tags = merge(
-    {Name="vpn-vpc"},
-    local.common_tags
+  {Name="vpn-vpc"},
+  local.common_tags
   )
 }
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "vpn-subnets" {
 
 resource "aws_route_table" "vpn-rt" {
   vpc_id = aws_vpc.vpn-vpc.id
-  tags = merge({Name="vpn-rt"},local.common_tags)
+  tags = merge({Name="vpn-route-table"},local.common_tags)
 }
 
 resource "aws_route_table_association" "vpn-rt-assoc" {
