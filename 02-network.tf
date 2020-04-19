@@ -171,3 +171,9 @@ resource "aws_network_acl_rule" "vpn-inbound-udp" {
   from_port = 1194
   to_port = 1194
 }
+
+resource "aws_eip" "vpn-instance-eip" {
+  vpc = true
+  depends_on = [aws_internet_gateway.igw]
+  tags = merge({Name="vpn-eip"},local.common_tags)
+}
