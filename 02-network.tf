@@ -36,3 +36,154 @@ resource "aws_route" "vpn-rt" {
   route_table_id = aws_route_table.vpn-rt.id
   gateway_id = aws_internet_gateway.igw.id
 }
+
+resource "aws_network_acl" "vpn-acl" {
+  vpc_id = aws_vpc.vpn-vpc.id
+  subnet_ids = aws_subnet.vpn-subnets.*.id
+  tags = merge({Name="vpn-acl"},local.common_tags)
+}
+
+resource "aws_network_acl_rule" "ssh-ingress" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "tcp"
+  rule_action = "allow"
+  rule_number = 1000
+  from_port = 22
+  to_port = 22
+  cidr_block = "103.44.33.69/32"
+}
+
+resource "aws_network_acl_rule" "ssh-egress" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "tcp"
+  egress = true
+  rule_action = "allow"
+  rule_number = 1000
+  from_port = 22
+  to_port = 22
+  cidr_block = "103.44.33.69/32"
+}
+
+resource "aws_network_acl_rule" "ephemeral-ingress-tcp" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  egress = false
+  protocol = "tcp"
+  rule_action = "allow"
+  rule_number = 1001
+  cidr_block = "0.0.0.0/0"
+  from_port = 1024
+  to_port = 65535
+}
+
+resource "aws_network_acl_rule" "ephemeral-ingress-udp" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "udp"
+  egress = false
+  rule_action = "allow"
+  rule_number = 1002
+  cidr_block = "0.0.0.0/0"
+  from_port = 1024
+  to_port = 65535
+}
+
+resource "aws_network_acl_rule" "ephermal-outbound-tcp" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "tcp"
+  egress = true
+  rule_action = "allow"
+  rule_number = 1001
+  cidr_block = "0.0.0.0/0"
+  from_port = 1024
+  to_port = 65535
+}
+
+resource "aws_network_acl_rule" "ephermal-outbound-udp" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "udp"
+  rule_action = "allow"
+  egress = true
+  rule_number = 1002
+  cidr_block = "0.0.0.0/0"
+  from_port = 1024
+  to_port = 65535
+}
+
+resource "aws_network_acl_rule" "openvpn-admin-ingress" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "tcp"
+  rule_action = "allow"
+  rule_number = 1003
+  from_port = 943
+  to_port = 943
+  cidr_block = "103.44.33.69/32"
+}
+
+resource "aws_network_acl_rule" "openvpn-admin-egress" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "tcp"
+  egress = true
+  rule_action = "allow"
+  rule_number = 1003
+  from_port = 943
+  to_port = 943
+  cidr_block = "103.44.33.69/32"
+}
+
+resource "aws_network_acl_rule" "openvpn-https-ingress" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "tcp"
+  rule_action = "allow"
+  rule_number = 1004
+  from_port = 443
+  to_port = 443
+  cidr_block = "103.44.33.69/32"
+}
+
+resource "aws_network_acl_rule" "openvpn-https-egress" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "tcp"
+  egress = true
+  rule_action = "allow"
+  rule_number = 1004
+  from_port = 443
+  to_port = 443
+  cidr_block = "103.44.33.69/32"
+}
+
+resource "aws_network_acl_rule" "vpn-outbound-udp" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "udp"
+  rule_action = "allow"
+  egress = true
+  rule_number = 1005
+  cidr_block = "0.0.0.0/0"
+  from_port = 1194
+  to_port = 1194
+}
+
+resource "aws_network_acl_rule" "vpn-inbound-udp" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "udp"
+  rule_action = "allow"
+  egress = false
+  rule_number = 1005
+  cidr_block = "0.0.0.0/0"
+  from_port = 1194
+  to_port = 1194
+}
+
+resource "aws_network_acl_rule" "vpn-outbound-all" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "-1"
+  rule_action = "allow"
+  egress = true
+  rule_number = 1006
+  cidr_block = "0.0.0.0/0"
+}
+
+resource "aws_eip" "vpn-instance-eip" {
+  vpc = true
+  depends_on = [aws_internet_gateway.igw]
+  instance = aws_instance.vpn-instance.id
+  tags = merge({Name="vpn-eip"},local.common_tags)
+}
