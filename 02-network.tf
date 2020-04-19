@@ -172,8 +172,18 @@ resource "aws_network_acl_rule" "vpn-inbound-udp" {
   to_port = 1194
 }
 
+resource "aws_network_acl_rule" "vpn-outbound-all" {
+  network_acl_id = aws_network_acl.vpn-acl.id
+  protocol = "-1"
+  rule_action = "allow"
+  egress = true
+  rule_number = 1006
+  cidr_block = "0.0.0.0/0"
+}
+
 resource "aws_eip" "vpn-instance-eip" {
   vpc = true
   depends_on = [aws_internet_gateway.igw]
+  instance = aws_instance.vpn-instance.id
   tags = merge({Name="vpn-eip"},local.common_tags)
 }

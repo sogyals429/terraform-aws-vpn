@@ -10,7 +10,7 @@ resource "aws_security_group_rule" "ssh-ingress" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_block = "103.44.33.69/32"
+  cidr_blocks = ["103.44.33.69/32"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow ssh inbound from Unilodge"
 }
@@ -18,10 +18,9 @@ resource "aws_security_group_rule" "ssh-ingress" {
 resource "aws_security_group_rule" "ssh-egress" {
   type = "egress"
   protocol = "tcp"
-  rule_number = 1000
   from_port = 22
   to_port = 22
-  cidr_block = "103.44.33.69/32"
+  cidr_blocks = ["103.44.33.69/32"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow ssh outbound from Unilodge"
 }
@@ -32,7 +31,7 @@ resource "aws_security_group_rule" "openvpn-admin-ingress" {
   protocol = "tcp"
   from_port = 943
   to_port = 943
-  cidr_block = "103.44.33.69/32"
+  cidr_blocks = ["103.44.33.69/32"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow vpn portal inbound from Unilodge"
 }
@@ -42,7 +41,7 @@ resource "aws_security_group_rule" "openvpn-admin-egress" {
   protocol = "tcp"
   from_port = 943
   to_port = 943
-  cidr_block = "103.44.33.69/32"
+  cidr_blocks = ["103.44.33.69/32"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow vpn portal outbound from Unilodge"
 }
@@ -52,7 +51,7 @@ resource "aws_security_group_rule" "openvpn-https-ingress" {
   protocol = "tcp"
   from_port = 443
   to_port = 443
-  cidr_block = "103.44.33.69/32"
+  cidr_blocks = ["103.44.33.69/32"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow https portal inbound from Unilodge"
 }
@@ -62,7 +61,7 @@ resource "aws_security_group_rule" "openvpn-https-egress" {
   protocol = "tcp"
   from_port = 443
   to_port = 443
-  cidr_block = "103.44.33.69/32"
+  cidr_blocks = ["103.44.33.69/32"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow https portal outbound from Unilodge"
 }
@@ -72,7 +71,7 @@ resource "aws_security_group_rule" "vpn-inbound-udp" {
   protocol = "udp"
   from_port = 1194
   to_port = 1194
-  cidr_block = "0.0.0.0/0"
+  cidr_blocks = ["0.0.0.0/0"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow to connect to vpn inbound"
 }
@@ -82,7 +81,17 @@ resource "aws_security_group_rule" "vpn-outbound-udp" {
   protocol = "udp"
   from_port = 1194
   to_port = 1194
-  cidr_block = "0.0.0.0/0"
+  cidr_blocks = ["0.0.0.0/0"]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow to connect to vpn outbound"
+}
+
+resource "aws_security_group_rule" "vpn-outbound-all" {
+  type = "egress"
+  protocol = "-1"
+  from_port = 0
+  to_port = 0
+  cidr_blocks = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.vpn-instance-sg.id
+  description = "Allow all traffic outbound"
 }
