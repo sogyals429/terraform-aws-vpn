@@ -24,7 +24,7 @@ jobs:
     
     - name: AWS Config
       run: '(curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip -q awscliv2.zip)  &&
-      (sudo ./aws/install) && (aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY}} && aws configure aws_secret_access_key=${{secrets.AWS_SECRET_KEY}})'
+      (sudo ./aws/install) && (aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY}} && aws configure aws_secret_access_key=${{secrets.AWS_SECRET_KEY}} && aws configure set region ${{secrets.AWS_REGION}})'
 #      (echo "[default] \naws_access_key_id=${{secrets.AWS_ACCESS_KEY}}\naws_secret_access_key=${{secrets.AWS_SECRET_KEY}}" >> ~/.aws/credentials)'
 
     - name: Install Terraform
