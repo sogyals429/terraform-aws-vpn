@@ -28,7 +28,9 @@ jobs:
     - name: Unzip Terraform Package
       run: 'unzip -o terraform_0.12.24_linux_amd64.zip'
 
-    # Runs a single command using the runners shell
+    - name: Init Terraform
+      run: 'terraform init'
+      
     - name: Execute 
       run: 'terraform plan --var-file variables.tfvars'
 
