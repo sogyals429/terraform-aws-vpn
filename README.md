@@ -27,5 +27,8 @@
 9. To connect system to VPN you will need to download a VPN Client e.g. [Tunnelblick](https://tunnelblick.net/downloads.html) or OpenVPN Connect (can be found in the profile page) as seen below.
  ![OpenVPN Connect App](https://i.ibb.co/bXrMpYq/Screen-Shot-2020-04-26-at-11-07-59-am.png)
 
+## To remove changes
+1. Execute `make destory` to remove all infrastructure
+
 ## Want to Help?
 Feel free to make an PR's or raise any issues 😀
