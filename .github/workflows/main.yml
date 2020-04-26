@@ -42,4 +42,4 @@ jobs:
       run: 'rm -rf .terraform/ && terraform init'
       
     - name: Execute 
-      run: 'terraform plan --var-file variables.tfvars'
+      run: 'make vpn'
