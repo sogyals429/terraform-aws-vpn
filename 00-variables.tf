@@ -2,6 +2,7 @@ data "aws_availability_zones" "available" {}
 
 variable "vpc_cidr" {}
 variable "aws_subnets" {}
+variable "my_ip" {type = string}
 
 data "aws_ami" "open-vpn-ami" {
   most_recent = true
