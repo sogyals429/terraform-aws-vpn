@@ -1,5 +1,4 @@
 .idea/*
-vpn-key-pair.pem
 # Local .terraform directories
 **/.terraform/*
 
