@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v2
     
     - name: AWS Config
-      run: 'echo "[default] \naws_access_key_id=${{secrets.AWS_ACCESS_KEY}}\naws_secret_access_key=${{secrets.AWS_SECRET_KEY}}" >> creds'
+      run: 'echo "[default] \naws_access_key_id=${{secrets.AWS_ACCESS_KEY}}\naws_secret_access_key=${{secrets.AWS_SECRET_KEY}}" >> ~/.aws/credentials'
     
     - name: Install Terraform
       run: 'wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip'
