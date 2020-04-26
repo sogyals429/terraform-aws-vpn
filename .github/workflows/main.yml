@@ -22,10 +22,15 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     
-    - name: AWS Config
-      run: '(curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip -q awscliv2.zip)  &&
-      (sudo ./aws/install) && (aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY}} && aws configure set aws_secret_access_key=${{secrets.AWS_SECRET_KEY}} && aws configure set region ${{secrets.AWS_REGION}})'
+    - name: Download AWS Config
+      run: '(curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip -q awscliv2.zip && sudo ./aws/install)'
+      shell: sh
 #      (echo "[default] \naws_access_key_id=${{secrets.AWS_ACCESS_KEY}}\naws_secret_access_key=${{secrets.AWS_SECRET_KEY}}" >> ~/.aws/credentials)'
+
+    - name: Setup AWS CLI
+      run: 'aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY}} &&
+       aws configure set aws_secret_access_key=${{secrets.AWS_SECRET_KEY}} && aws configure set region ${{secrets.AWS_REGION}})'
+      shell: sh
 
     - name: Install Terraform
       run: 'wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip'
