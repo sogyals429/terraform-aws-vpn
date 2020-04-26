@@ -6,6 +6,7 @@
 	<a href="https://github.com/sogyals429/terraform-aws-vpn/blob/master/LICENSE">
 	    <img src="https://img.shields.io/github/license/sogyals429/terraform-aws-vpn" alt="License">
 	</a>
+	![Terraform](https://github.com/sogyals429/terraform-aws-vpn/workflows/Terraform/badge.svg?branch=master)
 </p>
 
 # Prerequisites
