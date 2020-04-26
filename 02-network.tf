@@ -50,7 +50,7 @@ resource "aws_network_acl_rule" "ssh-ingress" {
   rule_number = 1000
   from_port = 22
   to_port = 22
-  cidr_block = "103.44.33.69/32"
+  cidr_block = var.my_ip
 }
 
 resource "aws_network_acl_rule" "ssh-egress" {
@@ -61,7 +61,7 @@ resource "aws_network_acl_rule" "ssh-egress" {
   rule_number = 1000
   from_port = 22
   to_port = 22
-  cidr_block = "103.44.33.69/32"
+  cidr_block = var.my_ip
 }
 
 resource "aws_network_acl_rule" "ephemeral-ingress-tcp" {
@@ -115,7 +115,7 @@ resource "aws_network_acl_rule" "openvpn-admin-ingress" {
   rule_number = 1003
   from_port = 943
   to_port = 943
-  cidr_block = "103.44.33.69/32"
+  cidr_block = var.my_ip
 }
 
 resource "aws_network_acl_rule" "openvpn-admin-egress" {
@@ -126,7 +126,7 @@ resource "aws_network_acl_rule" "openvpn-admin-egress" {
   rule_number = 1003
   from_port = 943
   to_port = 943
-  cidr_block = "103.44.33.69/32"
+  cidr_block = var.my_ip
 }
 
 resource "aws_network_acl_rule" "openvpn-https-ingress" {
@@ -136,7 +136,7 @@ resource "aws_network_acl_rule" "openvpn-https-ingress" {
   rule_number = 1004
   from_port = 443
   to_port = 443
-  cidr_block = "103.44.33.69/32"
+  cidr_block = var.my_ip
 }
 
 resource "aws_network_acl_rule" "openvpn-https-egress" {
@@ -147,7 +147,7 @@ resource "aws_network_acl_rule" "openvpn-https-egress" {
   rule_number = 1004
   from_port = 443
   to_port = 443
-  cidr_block = "103.44.33.69/32"
+  cidr_block = var.my_ip
 }
 
 resource "aws_network_acl_rule" "vpn-outbound-udp" {

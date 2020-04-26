@@ -10,7 +10,7 @@ resource "aws_security_group_rule" "ssh-ingress" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = ["103.44.33.69/32"]
+  cidr_blocks = [var.my_ip]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow ssh inbound from Unilodge"
 }
@@ -20,7 +20,7 @@ resource "aws_security_group_rule" "ssh-egress" {
   protocol = "tcp"
   from_port = 22
   to_port = 22
-  cidr_blocks = ["103.44.33.69/32"]
+  cidr_blocks = [var.my_ip]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow ssh outbound from Unilodge"
 }
@@ -31,7 +31,7 @@ resource "aws_security_group_rule" "openvpn-admin-ingress" {
   protocol = "tcp"
   from_port = 943
   to_port = 943
-  cidr_blocks = ["103.44.33.69/32"]
+  cidr_blocks = [var.my_ip]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow vpn portal inbound from Unilodge"
 }
@@ -41,7 +41,7 @@ resource "aws_security_group_rule" "openvpn-admin-egress" {
   protocol = "tcp"
   from_port = 943
   to_port = 943
-  cidr_blocks = ["103.44.33.69/32"]
+  cidr_blocks = [var.my_ip]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow vpn portal outbound from Unilodge"
 }
@@ -51,7 +51,7 @@ resource "aws_security_group_rule" "openvpn-https-ingress" {
   protocol = "tcp"
   from_port = 443
   to_port = 443
-  cidr_blocks = ["103.44.33.69/32"]
+  cidr_blocks = [var.my_ip]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow https portal inbound from Unilodge"
 }
@@ -61,7 +61,7 @@ resource "aws_security_group_rule" "openvpn-https-egress" {
   protocol = "tcp"
   from_port = 443
   to_port = 443
-  cidr_blocks = ["103.44.33.69/32"]
+  cidr_blocks = [var.my_ip]
   security_group_id = aws_security_group.vpn-instance-sg.id
   description = "Allow https portal outbound from Unilodge"
 }
