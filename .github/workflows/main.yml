@@ -21,11 +21,13 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+
+    - name: Checkout master
+      run: 'git checkout master'
     
     - name: Download AWS Config
       run: '(curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip -q awscliv2.zip && sudo ./aws/install)'
       shell: sh
-#      (echo "[default] \naws_access_key_id=${{secrets.AWS_ACCESS_KEY}}\naws_secret_access_key=${{secrets.AWS_SECRET_KEY}}" >> ~/.aws/credentials)'
 
     - name: Setup AWS CLI
       run: 'aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY}} &&
@@ -43,9 +45,3 @@ jobs:
       
     - name: Execute 
       run: 'terraform plan --var-file variables.tfvars'
-
-#     # Runs a set of commands using the runners shell
-#     - name: Run a multi-line script
-#       run: |
-#         echo Add other actions to build,
-#         echo test, and deploy your project.
