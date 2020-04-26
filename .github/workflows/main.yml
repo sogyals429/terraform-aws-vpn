@@ -22,8 +22,7 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 #     - uses: actions/checkout@v2 
     - name: Install Terraform
-      run: 'sh apt install wget
-      wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip'
+      run: 'sh apt install wget & wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip'
 
     # Runs a single command using the runners shell
     - name: Execute 
