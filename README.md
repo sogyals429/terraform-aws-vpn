@@ -1,6 +1,13 @@
-# OpenVpn Server 
-Basic OpenVPN server using IAC(Terraform) & AWS. 
-[https://github.com/sogyals429/terraform-aws-vpn/blob/master/LICENSE](https://github.com/sogyals429/terraform-aws-vpn/blob/master/LICENSE)
+# OpenVPN Server 
+<div align="center">
+	<b>Basic OpenVPN server using IAC(Terraform) & AWS. </b>
+</div>
+<p align="center">
+	<a href="https://github.com/sogyals429/terraform-aws-vpn/blob/master/LICENSE">
+	    <img src="https://img.shields.io/github/license/sogyals429/terraform-aws-vpn" alt="License">
+	</a>
+</p>
+
 # Prerequisites
 
 - Terraform 12 [https://www.terraform.io/downloads.html](https://www.terraform.io/downloads.html)
@@ -21,4 +28,4 @@ Basic OpenVPN server using IAC(Terraform) & AWS.
  ![OpenVPN Connect App](https://i.ibb.co/bXrMpYq/Screen-Shot-2020-04-26-at-11-07-59-am.png)
 
 ## Want to Help?
-Feel free to make an PR's or raise any issues 😍
+Feel free to make an PR's or raise any issues 😀
