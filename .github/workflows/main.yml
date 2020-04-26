@@ -39,7 +39,7 @@ jobs:
       run: 'unzip -o terraform_0.12.24_linux_amd64.zip'
 
     - name: Init Terraform
-      run: 'terraform init'
+      run: 'rm -rf .terraform/ && terraform init'
       
     - name: Execute 
       run: 'terraform plan --var-file variables.tfvars'
