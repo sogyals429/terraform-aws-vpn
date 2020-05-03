@@ -13,7 +13,7 @@ provider "aws" {
 }
 
 data "external" "git_branch" {
-  program = [ "${path.module}/scripts/get_branch.sh" ]
+  program = [ "../../scripts/get_branch.sh" ]
 }
 
 locals {
