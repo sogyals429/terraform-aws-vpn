@@ -1,5 +1,5 @@
 resource "aws_route53_zone" "private"{
-  name = "openvpn.com"
+  name = "openvpn.local"
 
   vpc {
     vpc_id = aws_vpc.vpn-vpc.id
