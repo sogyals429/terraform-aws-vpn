@@ -13,14 +13,14 @@ provider "aws" {
 }
 
 data "external" "git_branch" {
-  program = ["/usr/bin/bash", "/scripts/get_branch.sh" ]
+  program = [ "${path.module}/scripts/get_branch.sh" ]
 }
 
 locals {
   common_tags = {
     Project = "terraform-aws-vpn"
     Maintainer_Software = "Terraform"
-    Revision            = "${data.external.git_branch.result["output"]}"
+    Revision = "${data.external.git_branch.result["output"]}"
     Project = "git@github.com:sogyals429/terraform-aws-vpn.git"
   }
 }
