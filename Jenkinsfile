@@ -13,7 +13,7 @@ pipeline{
           }
           withCredentials([string(credentialsId: 'AWS_SECRET', variable: 'AWS_SECRET_KEY')]) { //set SECRET with the credential content
           sh """
-          aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}}
+          aws configure set aws_secret_access_key ${secrets.AWS_SECRET_KEY}
           """
           }
 
