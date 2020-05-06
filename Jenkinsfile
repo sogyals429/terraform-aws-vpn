@@ -6,14 +6,21 @@ pipeline{
     stage("Download Tools"){
       steps{
         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+          withCredentials([string(credentialsId: 'ACCESS_KEY', variable: 'ACCESS_KEY')]) { //set SECRET with the credential content
           sh """
-          rm -rf /tmp/aws/
-          mkdir /tmp/aws/
-          cd /tmp/aws/
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -so "awscliv2.zip" 
-          unzip -qo awscliv2.zip
-          ./aws/install
+          aws configure set aws_access_key_id ${ACCESS_KEY}
           """
+          }
+          withCredentials([string(credentialsId: 'AWS_SECRET', variable: 'AWS_SECRET_KEY')]) { //set SECRET with the credential content
+          sh """
+          aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}}
+          """
+          }
+
+          sh """
+          aws configure set region 'ap-southeast-2'
+          """
+          
         }
       }
     }
