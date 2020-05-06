@@ -12,7 +12,7 @@ pipeline{
           cd /tmp/aws/
           curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -so "awscliv2.zip" 
           unzip -qo awscliv2.zip
-          cd awscli
+          cd aws
           sudo ./aws/install
           """
         }
