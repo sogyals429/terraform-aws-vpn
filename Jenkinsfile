@@ -29,7 +29,7 @@ pipeline{
          wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
            sh """
             rm -rf .terraform/ && terraform init
-            make vpn
+           	 terraform apply --var-file variables.tfvars -auto-approve
           """
          }
       }
