@@ -19,8 +19,7 @@ pipeline{
 
           sh """
           aws configure set region 'ap-southeast-2'
-          """
-          
+          """ 
         }
       }
     }
