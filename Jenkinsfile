@@ -28,7 +28,7 @@ pipeline{
          wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
            sh """
             rm -rf .terraform/ && terraform init
-           	 terraform apply --var-file variables.tfvars -auto-approve
+           	 terraform apply --var-file variables.tfvars -auto-approve -input=false
           """
          }
       }
