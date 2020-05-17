@@ -5,7 +5,7 @@ pipeline{
   stages{
     stage("Configure Environment"){
       steps{
-        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
           withCredentials([string(credentialsId: 'ACCESS_KEY', variable: 'ACCESS_KEY')]) { //set SECRET with the credential content
           sh """
           aws configure set aws_access_key_id ${ACCESS_KEY}
@@ -26,19 +26,19 @@ pipeline{
     }
     stage("Download Terraform"){
       steps{
-         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
            sh """
             wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
             unzip -o terraform_0.12.24_linux_amd64.zip
-            mv terraform /usr/local/bin
           """
          }
       }
     }
     stage("Deploy"){
       steps{
-         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'xterm']) {
            sh """
+          ls
            rm -rf .terraform/ && terraform init
             make vpn
           """
