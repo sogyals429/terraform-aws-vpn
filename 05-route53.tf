@@ -1,13 +1,12 @@
-resource "aws_route53_zone" "private"{
-  name = "openvpn.local"
-
-  vpc {
-    vpc_id = aws_vpc.vpn-vpc.id
-  }
-
+resource "aws_acm_certificate" "sogyalsherpa_acm" {
+  domain_name       = "sogyalsherpa.com"
+  validation_method = "DNS"
   tags = merge({
-    Name="vpn-private-hosted-zone"
-  },
-    local.common_tags
+    Name="sogyalsherpa-certificate"
+  },local.common_tags
   )
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
