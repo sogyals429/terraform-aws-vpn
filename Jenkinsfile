@@ -3,7 +3,7 @@ pipeline{
   agent any
 
   stages{
-    stage("Download Tools"){
+    stage("Configure Environment"){
       steps{
         wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
           withCredentials([string(credentialsId: 'ACCESS_KEY', variable: 'ACCESS_KEY')]) { //set SECRET with the credential content
@@ -19,7 +19,10 @@ pipeline{
 
           sh """
           aws configure set region 'ap-southeast-2'
-          aws s3 ls
+          wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+          unzip -o terraform_0.12.24_linux_amd64.zip
+          rm -rf .terraform/ && terraform init
+          make vpn
           """
           
         }
