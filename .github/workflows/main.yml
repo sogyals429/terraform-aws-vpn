@@ -33,10 +33,10 @@ jobs:
       shell: sh
 
     - name: Install Terraform
-      run: 'wget https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip'
+      run: 'wget https://releases.hashicorp.com/terraform/0.12.25/terraform_0.12.25_linux_amd64.zip'
 
     - name: Unzip Terraform Package
-      run: 'unzip -o terraform_0.12.24_linux_amd64.zip'
+      run: 'unzip -o terraform_0.12.25_linux_amd64.zip'
 
     - name: Init Terraform
       run: 'rm -rf .terraform/ && terraform init'
