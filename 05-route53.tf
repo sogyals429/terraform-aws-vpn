@@ -5,10 +5,10 @@ data "aws_route53_zone" "main_zone" {
 resource "aws_acm_certificate" "cert" {
   domain_name       = "sogyalsherpa.com"
   validation_method = "DNS"
-  tags = merge({
-    Name="sogyalsherpa.com"
-  },local.common_tags
-  )
+  #  tags = merge({
+  # Name="sogyalsherpa.com"
+  #},local.common_tags
+  #)
 
   lifecycle {
     create_before_destroy = true
