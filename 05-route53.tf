@@ -9,7 +9,11 @@ resource "aws_acm_certificate" "cert" {
   # Name="sogyalsherpa.com"
   #},local.common_tags
   #)
-
+  tags = merge({
+    Name="sogyalsherpa.com"
+  },
+  local.common_tags
+  )
   lifecycle {
     create_before_destroy = true
   }
