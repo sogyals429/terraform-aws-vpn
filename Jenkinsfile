@@ -29,6 +29,7 @@ pipeline{
            sh """
             rm -rf .terraform/ && terraform init
            	terraform apply --var-file variables.tfvars -auto-approve -input=false
+            echo "test"
           """
          }
       }
