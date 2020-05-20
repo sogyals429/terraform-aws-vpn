@@ -8,6 +8,7 @@ resource "aws_key_pair" "vpn-key-pair" {
   )
 }
 resource "aws_instance" "vpn-instance" {
+  depends_on = [aws_subnet.vpn-subnets]
   ami = data.aws_ami.open-vpn-ami.id
   instance_type = "t2.small"
   vpc_security_group_ids = [aws_security_group.vpn-instance-sg.id]
