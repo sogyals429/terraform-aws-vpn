@@ -17,6 +17,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "vpn-subnets" {
   count = length(data.aws_availability_zones.available.names)
   cidr_block = element(var.aws_subnets,count.index )
+  availability_zone = data.aws_availability_zones.available.names[count.index]
   vpc_id = aws_vpc.vpn-vpc.id
   map_public_ip_on_launch = true
   tags = merge({Name="vpn-subnet-${count.index}"},local.common_tags)
