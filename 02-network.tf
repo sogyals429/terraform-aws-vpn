@@ -193,7 +193,6 @@ resource "aws_eip" "vpn-instance-eip" {
 
 resource "aws_ec2_transit_gateway" "dev-tgw" {
   description = "dev-tgw-1"
-  default_route_table_association = disable
 }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "dev-vpc-attachment" {
