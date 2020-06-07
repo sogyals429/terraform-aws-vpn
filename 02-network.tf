@@ -193,12 +193,14 @@ resource "aws_eip" "vpn-instance-eip" {
 
 resource "aws_ec2_transit_gateway" "dev-tgw" {
   description = "dev-tgw-1"
+  default_route_table_association = disable
 }
 
-resource "aws_ec2_transit_gateway_vpc_attachment" "example" {
-  subnet_ids         = aws_subnet.vpn-subnets.*.id
-  transit_gateway_id = aws_ec2_transit_gateway.dev-tgw.id
-  vpc_id             = aws_vpc.vpn-vpc.id
+resource "aws_ec2_transit_gateway_vpc_attachment" "dev-vpc-attachment" {
+  subnet_ids                                      = aws_subnet.vpn-subnets.*.id
+  transit_gateway_id                              = aws_ec2_transit_gateway.dev-tgw.id
+  vpc_id                                          = aws_vpc.vpn-vpc.id
+  transit_gateway_default_route_table_association = false
 }
 
 resource "aws_ec2_transit_gateway_route_table" "dev-tgw-rtb" {
