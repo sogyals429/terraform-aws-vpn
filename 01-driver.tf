@@ -20,7 +20,7 @@ locals {
   common_tags = {
     Project = "terraform-aws-vpn"
     Maintainer_Software = "Terraform"
-    Revision = "${data.external.git_branch.result["output"]}"
+    Revision = data.external.git_branch.result["output"]
     Project = "git@github.com:sogyals429/terraform-aws-vpn.git"
   }
 }
