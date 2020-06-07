@@ -190,29 +190,3 @@ resource "aws_eip" "vpn-instance-eip" {
   instance = aws_instance.vpn-instance.id
   tags = merge({Name="vpn-eip"},local.common_tags)
 }
-
-resource "aws_ec2_transit_gateway" "dev-tgw" {
-  description = "dev-tgw-1"
-}
-
-resource "aws_ec2_transit_gateway_vpc_attachment" "dev-vpc-attachment" {
-  subnet_ids                                      = aws_subnet.vpn-subnets.*.id
-  transit_gateway_id                              = aws_ec2_transit_gateway.dev-tgw.id
-  vpc_id                                          = aws_vpc.vpn-vpc.id
-  transit_gateway_default_route_table_association = false
-}
-
-resource "aws_ec2_transit_gateway_route_table" "dev-tgw-rtb" {
-  transit_gateway_id = aws_ec2_transit_gateway.dev-tgw.id
-}
-
-# resource "aws_ec2_transit_gateway_route" "dev-vpn-route" {
-#   destination_cidr_block         = "0.0.0.0/0"
-#   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.dev-vpc-attachment.id
-#   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.dev-tgw-rtb.id
-# }
-
-resource "aws_ec2_transit_gateway_route_table_association" "dev-tgw-assoc" {
-  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.dev-vpc-attachment.id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.dev-tgw-rtb.id
-}
