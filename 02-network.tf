@@ -209,5 +209,5 @@ resource "aws_ec2_transit_gateway_route_table" "dev-tgw-rtb" {
 resource "aws_ec2_transit_gateway_route" "dev-vpn-route" {
   destination_cidr_block         = "0.0.0.0/0"
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.dev-vpc-attachment.id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway.dev-tgw-rtb.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.dev-tgw-rtb.id
 }
