@@ -190,3 +190,17 @@ resource "aws_eip" "vpn-instance-eip" {
   instance = aws_instance.vpn-instance.id
   tags = merge({Name="vpn-eip"},local.common_tags)
 }
+
+resource "aws_ec2_transit_gateway" "dev-tgw" {
+  description = "dev-tgw-1"
+}
+
+resource "aws_ec2_transit_gateway_vpc_attachment" "example" {
+  subnet_ids         = [aws_subnet.vpn-subnets.id]
+  transit_gateway_id = aws_ec2_transit_gateway.dev-tgw.id
+  vpc_id             = aws_vpc.vpn-vpc.id
+}
+
+resource "aws_ec2_transit_gateway_route_table" "dev-tgw-rtb" {
+  transit_gateway_id = aws_ec2_transit_gateway.dev-tgw.id
+}
