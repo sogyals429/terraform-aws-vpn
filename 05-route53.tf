@@ -1,5 +1,5 @@
 data "aws_route53_zone" "main_zone" {
-  name         = "sogyalsherpa.com"
+  name = "sogyalsherpa.com"
 }
 
 resource "aws_acm_certificate" "cert" {
